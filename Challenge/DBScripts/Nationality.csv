@@ -1,0 +1,13 @@
+id,Nation,Code,Logo,IsActive
+1,Afghanistan,AFG,afg.jpg,1
+2,Australia,AUS,aus.jpg,1
+3,Bangladesh,BGD,bgd.jpg,1
+4,England,ENG,eng.jpg,1
+5,India,IND,ind.jpg,1
+6,Ireland,IRL,irl.jpg,1
+7,New Zealand,NZL,nzl.jpg,1
+8,Pakistan,PAK,pak.jpg,1
+9,South Africa,SA,sa.jpg,1
+10,Sri Lanka,SL,sl.jpg,1
+11,West Indies,WI,wi.jpg,1
+12,Zimbabwe,ZWE,zwe.jpg,1

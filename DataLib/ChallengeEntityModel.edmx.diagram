@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9493976795f3455b8c338ef5999c7b74" Name="Diagram1">
+        <EntityTypeShape EntityType="ChallengeModel.Match" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChallengeModel.Nationality" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChallengeModel.Player" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChallengeModel.Series" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChallengeModel.SeriesTeamPlayer" Width="1.5" PointX="4.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChallengeModel.SeriesTeam" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChallengeModel.SeriesType" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChallengeModel.BetDetail" Width="1.5" PointX="7.125" PointY="14.5" />
+        <EntityTypeShape EntityType="ChallengeModel.BetType" Width="1.5" PointX="4.875" PointY="14.625" />
+        <EntityTypeShape EntityType="ChallengeModel.Country" Width="1.5" PointX="7.75" PointY="6.75" />
+        <EntityTypeShape EntityType="ChallengeModel.Match_bets" Width="1.5" PointX="9.375" PointY="1.875" />
+        <EntityTypeShape EntityType="ChallengeModel.MatchChallenge" Width="1.5" PointX="11.625" PointY="2.5" />
+        <EntityTypeShape EntityType="ChallengeModel.Member" Width="1.5" PointX="7.125" PointY="10" />
+        <EntityTypeShape EntityType="ChallengeModel.State" Width="1.5" PointX="4.875" PointY="10.75" />
+        <EntityTypeShape EntityType="ChallengeModel.sysdiagram" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="ChallengeModel.MemberTransaction" Width="1.5" PointX="9.75" PointY="6.75" />
+        <EntityTypeShape EntityType="ChallengeModel.MemberWallet" Width="1.5" PointX="9.75" PointY="10.75" />
+        <AssociationConnector Association="ChallengeModel.FK__BetDetail__BetId__74AE54BC" />
+        <AssociationConnector Association="ChallengeModel.FK__Match_bet__BetDe__7B5B524B" />
+        <AssociationConnector Association="ChallengeModel.FK__Match_bet__BetId__7A672E12" />
+        <AssociationConnector Association="ChallengeModel.FK__Match__SeriesId__75A278F5" />
+        <AssociationConnector Association="ChallengeModel.FK__Match__SeriesTea__76969D2E" />
+        <AssociationConnector Association="ChallengeModel.FK__Match_bet__Match__787EE5A0" />
+        <AssociationConnector Association="ChallengeModel.FK__Match_bet__Membe__7C4F7684" />
+        <AssociationConnector Association="ChallengeModel.FK__Match_bet__Playe__797309D9" />
+        <AssociationConnector Association="ChallengeModel.FK__MatchChal__Match__7D439ABD" />
+        <AssociationConnector Association="ChallengeModel.FK__MatchChal__Membe__7E37BEF6" />
+        <AssociationConnector Association="ChallengeModel.FK__Members__StateId__7F2BE32F" />
+        <AssociationConnector Association="ChallengeModel.FK__SeriesTea__Playe__02FC7413" />
+        <AssociationConnector Association="ChallengeModel.FK__Series__SeriesTy__00200768" />
+        <AssociationConnector Association="ChallengeModel.FK__SeriesTea__Serie__01142BA1" />
+        <AssociationConnector Association="ChallengeModel.FK__SeriesTea__Serie__02084FDA" />
+        <EntityTypeShape EntityType="ChallengeModel.MatchBet" Width="1.5" PointX="12.375" PointY="7.875" />
+        <AssociationConnector Association="ChallengeModel.FK__Match_bet__BetDe__7B5B524B1" />
+        <AssociationConnector Association="ChallengeModel.FK__Match_bet__BetId__7A672E121" />
+        <AssociationConnector Association="ChallengeModel.FK__Match_bet__Match__787EE5A01" />
+        <AssociationConnector Association="ChallengeModel.FK__Match_bet__Membe__7C4F76841" />
+        <AssociationConnector Association="ChallengeModel.FK__Match_bet__Playe__797309D91" />
+        <AssociationConnector Association="ChallengeModel.FK__MatchChal__Match__7D439ABD1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,1382 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ChallengeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BetDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Bet" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="BetValue" Type="int" Nullable="false" />
+          <Property Name="BetId" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BetTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Bet" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ShortCode" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Match">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SeriesId" Type="int" Nullable="false" />
+          <Property Name="SeriesTeamId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GroundName" Type="nvarchar" MaxLength="100" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="IsActive" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MatchBets">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MatchId" Type="int" Nullable="false" />
+          <Property Name="PlayerId" Type="int" Nullable="false" />
+          <Property Name="BetId" Type="int" Nullable="false" />
+          <Property Name="BetDetailsId" Type="int" Nullable="false" />
+          <Property Name="MemberId" Type="int" Nullable="false" />
+          <Property Name="IsPrivate" Type="bit" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MatchChallenges">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MatchBetId" Type="int" Nullable="false" />
+          <Property Name="MemberId" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiledDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Members">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="PhoneNumber" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="StateId" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Challenge.dbo.MemberTransactions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="MemberTransactions">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="MemberId" />
+            <PropertyRef Name="Credit" />
+            <PropertyRef Name="Debit" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="ModifiedDate" />
+            <PropertyRef Name="CreatedBy" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="MemberId" Type="int" Nullable="false" />
+          <Property Name="Credit" Type="int" Nullable="false" />
+          <Property Name="Debit" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Challenge.dbo.MemberWallet' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="MemberWallet">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="MemberId" />
+            <PropertyRef Name="Credit" />
+            <PropertyRef Name="Debit" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="ModifiedDate" />
+            <PropertyRef Name="CreatedBy" />
+            <PropertyRef Name="Modifiedby" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberId" Type="int" Nullable="false" />
+          <Property Name="Credit" Type="int" Nullable="false" />
+          <Property Name="Debit" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="Modifiedby" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Nationality">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nation" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="Logo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsActive" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Players">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Nationality" Type="int" Nullable="false" />
+          <Property Name="Bats" Type="nvarchar" MaxLength="50" />
+          <Property Name="Bowls" Type="nvarchar" MaxLength="50" />
+          <Property Name="Credits" Type="decimal" Precision="3" Scale="1" />
+          <Property Name="Logo" Type="nvarchar" MaxLength="50" />
+          <Property Name="TotalPoints" Type="decimal" Precision="6" Scale="1" />
+          <Property Name="IsActive" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Series">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="SeriesTypes" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" />
+          <Property Name="NoOfMatchs" Type="int" />
+          <Property Name="NoOfTeams" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="IsActive" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SeriesTeamPlayers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SeriesId" Type="int" Nullable="false" />
+          <Property Name="SeriesTeamsId" Type="int" Nullable="false" />
+          <Property Name="PlayerId" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SeriesTeams">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SeriesId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Logo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsActive" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SeriesTypes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsActive" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountryId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ShortCode" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK__BetDetail__BetId__74AE54BC">
+          <End Role="BetTypes" Type="Self.BetTypes" Multiplicity="1" />
+          <End Role="BetDetails" Type="Self.BetDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BetTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BetDetails">
+              <PropertyRef Name="BetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Match__SeriesId__75A278F5">
+          <End Role="Series" Type="Self.Series" Multiplicity="1" />
+          <End Role="Match" Type="Self.Match" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Series">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Match">
+              <PropertyRef Name="SeriesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Match__SeriesTea__76969D2E">
+          <End Role="SeriesTeams" Type="Self.SeriesTeams" Multiplicity="1" />
+          <End Role="Match" Type="Self.Match" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SeriesTeams">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Match">
+              <PropertyRef Name="SeriesTeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Match_bet__BetDe__7B5B524B">
+          <End Role="BetDetails" Type="Self.BetDetails" Multiplicity="1" />
+          <End Role="MatchBets" Type="Self.MatchBets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BetDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MatchBets">
+              <PropertyRef Name="BetDetailsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Match_bet__BetId__7A672E12">
+          <End Role="BetTypes" Type="Self.BetTypes" Multiplicity="1" />
+          <End Role="MatchBets" Type="Self.MatchBets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BetTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MatchBets">
+              <PropertyRef Name="BetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Match_bet__Match__787EE5A0">
+          <End Role="Match" Type="Self.Match" Multiplicity="1" />
+          <End Role="MatchBets" Type="Self.MatchBets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Match">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MatchBets">
+              <PropertyRef Name="MatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Match_bet__Membe__7C4F7684">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="MatchBets" Type="Self.MatchBets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MatchBets">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Match_bet__Playe__797309D9">
+          <End Role="Players" Type="Self.Players" Multiplicity="1" />
+          <End Role="MatchBets" Type="Self.MatchBets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Players">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MatchBets">
+              <PropertyRef Name="PlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MatchChal__Match__7D439ABD">
+          <End Role="MatchBets" Type="Self.MatchBets" Multiplicity="1" />
+          <End Role="MatchChallenges" Type="Self.MatchChallenges" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MatchBets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MatchChallenges">
+              <PropertyRef Name="MatchBetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MatchChal__Membe__7E37BEF6">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="MatchChallenges" Type="Self.MatchChallenges" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MatchChallenges">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Members__StateId__7F2BE32F">
+          <End Role="State" Type="Self.State" Multiplicity="0..1" />
+          <End Role="Members" Type="Self.Members" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Members">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Series__SeriesTy__00200768">
+          <End Role="SeriesTypes" Type="Self.SeriesTypes" Multiplicity="1" />
+          <End Role="Series" Type="Self.Series" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SeriesTypes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Series">
+              <PropertyRef Name="SeriesTypes" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SeriesTea__Playe__02FC7413">
+          <End Role="Players" Type="Self.Players" Multiplicity="1" />
+          <End Role="SeriesTeamPlayers" Type="Self.SeriesTeamPlayers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Players">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SeriesTeamPlayers">
+              <PropertyRef Name="PlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SeriesTea__Serie__01142BA1">
+          <End Role="Series" Type="Self.Series" Multiplicity="1" />
+          <End Role="SeriesTeamPlayers" Type="Self.SeriesTeamPlayers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Series">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SeriesTeamPlayers">
+              <PropertyRef Name="SeriesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SeriesTea__Serie__02084FDA">
+          <End Role="SeriesTeams" Type="Self.SeriesTeams" Multiplicity="1" />
+          <End Role="SeriesTeamPlayers" Type="Self.SeriesTeamPlayers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SeriesTeams">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SeriesTeamPlayers">
+              <PropertyRef Name="SeriesTeamsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ChallengeModelStoreContainer">
+          <EntitySet Name="BetDetails" EntityType="Self.BetDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BetTypes" EntityType="Self.BetTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Match" EntityType="Self.Match" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MatchBets" EntityType="Self.MatchBets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MatchChallenges" EntityType="Self.MatchChallenges" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nationality" EntityType="Self.Nationality" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Players" EntityType="Self.Players" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Series" EntityType="Self.Series" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SeriesTeamPlayers" EntityType="Self.SeriesTeamPlayers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SeriesTeams" EntityType="Self.SeriesTeams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SeriesTypes" EntityType="Self.SeriesTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="State" EntityType="Self.State" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MemberTransactions" EntityType="Self.MemberTransactions" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [MemberTransactions].[Id] AS [Id], 
+    [MemberTransactions].[MemberId] AS [MemberId], 
+    [MemberTransactions].[Credit] AS [Credit], 
+    [MemberTransactions].[Debit] AS [Debit], 
+    [MemberTransactions].[CreatedDate] AS [CreatedDate], 
+    [MemberTransactions].[ModifiedDate] AS [ModifiedDate], 
+    [MemberTransactions].[CreatedBy] AS [CreatedBy], 
+    [MemberTransactions].[ModifiedBy] AS [ModifiedBy]
+    FROM [dbo].[MemberTransactions] AS [MemberTransactions]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="MemberWallet" EntityType="Self.MemberWallet" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [MemberWallet].[Id] AS [Id], 
+    [MemberWallet].[MemberId] AS [MemberId], 
+    [MemberWallet].[Credit] AS [Credit], 
+    [MemberWallet].[Debit] AS [Debit], 
+    [MemberWallet].[CreatedDate] AS [CreatedDate], 
+    [MemberWallet].[ModifiedDate] AS [ModifiedDate], 
+    [MemberWallet].[CreatedBy] AS [CreatedBy], 
+    [MemberWallet].[Modifiedby] AS [Modifiedby]
+    FROM [dbo].[MemberWallet] AS [MemberWallet]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__BetDetail__BetId__74AE54BC" Association="Self.FK__BetDetail__BetId__74AE54BC">
+            <End Role="BetTypes" EntitySet="BetTypes" />
+            <End Role="BetDetails" EntitySet="BetDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Match__SeriesId__75A278F5" Association="Self.FK__Match__SeriesId__75A278F5">
+            <End Role="Series" EntitySet="Series" />
+            <End Role="Match" EntitySet="Match" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Match__SeriesTea__76969D2E" Association="Self.FK__Match__SeriesTea__76969D2E">
+            <End Role="SeriesTeams" EntitySet="SeriesTeams" />
+            <End Role="Match" EntitySet="Match" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Match_bet__BetDe__7B5B524B" Association="Self.FK__Match_bet__BetDe__7B5B524B">
+            <End Role="BetDetails" EntitySet="BetDetails" />
+            <End Role="MatchBets" EntitySet="MatchBets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Match_bet__BetId__7A672E12" Association="Self.FK__Match_bet__BetId__7A672E12">
+            <End Role="BetTypes" EntitySet="BetTypes" />
+            <End Role="MatchBets" EntitySet="MatchBets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Match_bet__Match__787EE5A0" Association="Self.FK__Match_bet__Match__787EE5A0">
+            <End Role="Match" EntitySet="Match" />
+            <End Role="MatchBets" EntitySet="MatchBets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Match_bet__Membe__7C4F7684" Association="Self.FK__Match_bet__Membe__7C4F7684">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="MatchBets" EntitySet="MatchBets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Match_bet__Playe__797309D9" Association="Self.FK__Match_bet__Playe__797309D9">
+            <End Role="Players" EntitySet="Players" />
+            <End Role="MatchBets" EntitySet="MatchBets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MatchChal__Match__7D439ABD" Association="Self.FK__MatchChal__Match__7D439ABD">
+            <End Role="MatchBets" EntitySet="MatchBets" />
+            <End Role="MatchChallenges" EntitySet="MatchChallenges" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MatchChal__Membe__7E37BEF6" Association="Self.FK__MatchChal__Membe__7E37BEF6">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="MatchChallenges" EntitySet="MatchChallenges" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Members__StateId__7F2BE32F" Association="Self.FK__Members__StateId__7F2BE32F">
+            <End Role="State" EntitySet="State" />
+            <End Role="Members" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Series__SeriesTy__00200768" Association="Self.FK__Series__SeriesTy__00200768">
+            <End Role="SeriesTypes" EntitySet="SeriesTypes" />
+            <End Role="Series" EntitySet="Series" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SeriesTea__Playe__02FC7413" Association="Self.FK__SeriesTea__Playe__02FC7413">
+            <End Role="Players" EntitySet="Players" />
+            <End Role="SeriesTeamPlayers" EntitySet="SeriesTeamPlayers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SeriesTea__Serie__01142BA1" Association="Self.FK__SeriesTea__Serie__01142BA1">
+            <End Role="Series" EntitySet="Series" />
+            <End Role="SeriesTeamPlayers" EntitySet="SeriesTeamPlayers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SeriesTea__Serie__02084FDA" Association="Self.FK__SeriesTea__Serie__02084FDA">
+            <End Role="SeriesTeams" EntitySet="SeriesTeams" />
+            <End Role="SeriesTeamPlayers" EntitySet="SeriesTeamPlayers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ChallengeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Match">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SeriesId" Type="Int32" Nullable="false" />
+          <Property Name="SeriesTeamId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GroundName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Series" Relationship="ChallengeModel.FK__Match__SeriesId__75A278F5" FromRole="Match" ToRole="Series" />
+          <NavigationProperty Name="SeriesTeam" Relationship="ChallengeModel.FK__Match__SeriesTea__76969D2E" FromRole="Match" ToRole="SeriesTeam" />
+          <NavigationProperty Name="Match_bets" Relationship="ChallengeModel.FK__Match_bet__Match__787EE5A0" FromRole="Match" ToRole="Match_bets" />
+          <NavigationProperty Name="MatchBets" Relationship="ChallengeModel.FK__Match_bet__Match__787EE5A01" FromRole="Match" ToRole="MatchBet" />
+        </EntityType>
+        <EntityType Name="Nationality">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Logo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsActive" Type="Byte" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Player">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Role" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nationality" Type="Int32" Nullable="false" />
+          <Property Name="Bats" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Bowls" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Credits" Type="Decimal" Precision="3" Scale="1" />
+          <Property Name="Logo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TotalPoints" Type="Decimal" Precision="6" Scale="1" />
+          <Property Name="IsActive" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Match_bets" Relationship="ChallengeModel.FK__Match_bet__Playe__797309D9" FromRole="Player" ToRole="Match_bets" />
+          <NavigationProperty Name="SeriesTeamPlayers" Relationship="ChallengeModel.FK__SeriesTea__Playe__02FC7413" FromRole="Player" ToRole="SeriesTeamPlayer" />
+          <NavigationProperty Name="MatchBets" Relationship="ChallengeModel.FK__Match_bet__Playe__797309D91" FromRole="Player" ToRole="MatchBet" />
+        </EntityType>
+        <EntityType Name="Series">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SeriesTypes" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="NoOfMatchs" Type="Int32" />
+          <Property Name="NoOfTeams" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Matches" Relationship="ChallengeModel.FK__Match__SeriesId__75A278F5" FromRole="Series" ToRole="Match" />
+          <NavigationProperty Name="SeriesType" Relationship="ChallengeModel.FK__Series__SeriesTy__00200768" FromRole="Series" ToRole="SeriesType" />
+          <NavigationProperty Name="SeriesTeamPlayers" Relationship="ChallengeModel.FK__SeriesTea__Serie__01142BA1" FromRole="Series" ToRole="SeriesTeamPlayer" />
+        </EntityType>
+        <EntityType Name="SeriesTeamPlayer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SeriesId" Type="Int32" Nullable="false" />
+          <Property Name="SeriesTeamsId" Type="Int32" Nullable="false" />
+          <Property Name="PlayerId" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Player" Relationship="ChallengeModel.FK__SeriesTea__Playe__02FC7413" FromRole="SeriesTeamPlayer" ToRole="Player" />
+          <NavigationProperty Name="Series" Relationship="ChallengeModel.FK__SeriesTea__Serie__01142BA1" FromRole="SeriesTeamPlayer" ToRole="Series" />
+          <NavigationProperty Name="SeriesTeam" Relationship="ChallengeModel.FK__SeriesTea__Serie__02084FDA" FromRole="SeriesTeamPlayer" ToRole="SeriesTeam" />
+        </EntityType>
+        <EntityType Name="SeriesTeam">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SeriesId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Logo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsActive" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Matches" Relationship="ChallengeModel.FK__Match__SeriesTea__76969D2E" FromRole="SeriesTeam" ToRole="Match" />
+          <NavigationProperty Name="SeriesTeamPlayers" Relationship="ChallengeModel.FK__SeriesTea__Serie__02084FDA" FromRole="SeriesTeam" ToRole="SeriesTeamPlayer" />
+        </EntityType>
+        <EntityType Name="SeriesType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsActive" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Series" Relationship="ChallengeModel.FK__Series__SeriesTy__00200768" FromRole="SeriesType" ToRole="Series" />
+        </EntityType>
+        <EntityContainer Name="ChallengeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Matches" EntityType="Self.Match" />
+          <EntitySet Name="Nationalities" EntityType="Self.Nationality" />
+          <EntitySet Name="Players" EntityType="Self.Player" />
+          <EntitySet Name="Series" EntityType="Self.Series" />
+          <EntitySet Name="SeriesTeamPlayers" EntityType="Self.SeriesTeamPlayer" />
+          <EntitySet Name="SeriesTeams" EntityType="Self.SeriesTeam" />
+          <EntitySet Name="SeriesTypes" EntityType="Self.SeriesType" />
+          <EntitySet Name="BetDetails" EntityType="ChallengeModel.BetDetail" />
+          <EntitySet Name="BetTypes" EntityType="ChallengeModel.BetType" />
+          <EntitySet Name="Countries" EntityType="ChallengeModel.Country" />
+          <EntitySet Name="Match_bets" EntityType="ChallengeModel.Match_bets" />
+          <EntitySet Name="MatchChallenges" EntityType="ChallengeModel.MatchChallenge" />
+          <EntitySet Name="Members" EntityType="ChallengeModel.Member" />
+          <EntitySet Name="States" EntityType="ChallengeModel.State" />
+          <EntitySet Name="sysdiagrams" EntityType="ChallengeModel.sysdiagram" />
+          <EntitySet Name="MemberTransactions" EntityType="ChallengeModel.MemberTransaction" />
+          <EntitySet Name="MemberWallets" EntityType="ChallengeModel.MemberWallet" />
+          <AssociationSet Name="FK__BetDetail__BetId__74AE54BC" Association="ChallengeModel.FK__BetDetail__BetId__74AE54BC">
+            <End Role="BetType" EntitySet="BetTypes" />
+            <End Role="BetDetail" EntitySet="BetDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Match_bet__BetDe__7B5B524B" Association="ChallengeModel.FK__Match_bet__BetDe__7B5B524B">
+            <End Role="BetDetail" EntitySet="BetDetails" />
+            <End Role="Match_bets" EntitySet="Match_bets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Match_bet__BetId__7A672E12" Association="ChallengeModel.FK__Match_bet__BetId__7A672E12">
+            <End Role="BetType" EntitySet="BetTypes" />
+            <End Role="Match_bets" EntitySet="Match_bets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Match__SeriesId__75A278F5" Association="ChallengeModel.FK__Match__SeriesId__75A278F5">
+            <End Role="Series" EntitySet="Series" />
+            <End Role="Match" EntitySet="Matches" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Match__SeriesTea__76969D2E" Association="ChallengeModel.FK__Match__SeriesTea__76969D2E">
+            <End Role="SeriesTeam" EntitySet="SeriesTeams" />
+            <End Role="Match" EntitySet="Matches" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Match_bet__Match__787EE5A0" Association="ChallengeModel.FK__Match_bet__Match__787EE5A0">
+            <End Role="Match" EntitySet="Matches" />
+            <End Role="Match_bets" EntitySet="Match_bets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Match_bet__Membe__7C4F7684" Association="ChallengeModel.FK__Match_bet__Membe__7C4F7684">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="Match_bets" EntitySet="Match_bets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Match_bet__Playe__797309D9" Association="ChallengeModel.FK__Match_bet__Playe__797309D9">
+            <End Role="Player" EntitySet="Players" />
+            <End Role="Match_bets" EntitySet="Match_bets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MatchChal__Match__7D439ABD" Association="ChallengeModel.FK__MatchChal__Match__7D439ABD">
+            <End Role="Match_bets" EntitySet="Match_bets" />
+            <End Role="MatchChallenge" EntitySet="MatchChallenges" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MatchChal__Membe__7E37BEF6" Association="ChallengeModel.FK__MatchChal__Membe__7E37BEF6">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="MatchChallenge" EntitySet="MatchChallenges" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Members__StateId__7F2BE32F" Association="ChallengeModel.FK__Members__StateId__7F2BE32F">
+            <End Role="State" EntitySet="States" />
+            <End Role="Member" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SeriesTea__Playe__02FC7413" Association="ChallengeModel.FK__SeriesTea__Playe__02FC7413">
+            <End Role="Player" EntitySet="Players" />
+            <End Role="SeriesTeamPlayer" EntitySet="SeriesTeamPlayers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Series__SeriesTy__00200768" Association="ChallengeModel.FK__Series__SeriesTy__00200768">
+            <End Role="SeriesType" EntitySet="SeriesTypes" />
+            <End Role="Series" EntitySet="Series" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SeriesTea__Serie__01142BA1" Association="ChallengeModel.FK__SeriesTea__Serie__01142BA1">
+            <End Role="Series" EntitySet="Series" />
+            <End Role="SeriesTeamPlayer" EntitySet="SeriesTeamPlayers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SeriesTea__Serie__02084FDA" Association="ChallengeModel.FK__SeriesTea__Serie__02084FDA">
+            <End Role="SeriesTeam" EntitySet="SeriesTeams" />
+            <End Role="SeriesTeamPlayer" EntitySet="SeriesTeamPlayers" />
+          </AssociationSet>
+          <EntitySet Name="MatchBets" EntityType="ChallengeModel.MatchBet" />
+          <AssociationSet Name="FK__Match_bet__BetDe__7B5B524B1" Association="ChallengeModel.FK__Match_bet__BetDe__7B5B524B1">
+            <End Role="BetDetail" EntitySet="BetDetails" />
+            <End Role="MatchBet" EntitySet="MatchBets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Match_bet__BetId__7A672E121" Association="ChallengeModel.FK__Match_bet__BetId__7A672E121">
+            <End Role="BetType" EntitySet="BetTypes" />
+            <End Role="MatchBet" EntitySet="MatchBets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Match_bet__Match__787EE5A01" Association="ChallengeModel.FK__Match_bet__Match__787EE5A01">
+            <End Role="Match" EntitySet="Matches" />
+            <End Role="MatchBet" EntitySet="MatchBets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Match_bet__Membe__7C4F76841" Association="ChallengeModel.FK__Match_bet__Membe__7C4F76841">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="MatchBet" EntitySet="MatchBets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Match_bet__Playe__797309D91" Association="ChallengeModel.FK__Match_bet__Playe__797309D91">
+            <End Role="Player" EntitySet="Players" />
+            <End Role="MatchBet" EntitySet="MatchBets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MatchChal__Match__7D439ABD1" Association="ChallengeModel.FK__MatchChal__Match__7D439ABD1">
+            <End Role="MatchBet" EntitySet="MatchBets" />
+            <End Role="MatchChallenge" EntitySet="MatchChallenges" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="BetDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Bet" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="BetValue" Type="Int32" Nullable="false" />
+          <Property Name="BetId" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="BetType" Relationship="ChallengeModel.FK__BetDetail__BetId__74AE54BC" FromRole="BetDetail" ToRole="BetType" />
+          <NavigationProperty Name="Match_bets" Relationship="ChallengeModel.FK__Match_bet__BetDe__7B5B524B" FromRole="BetDetail" ToRole="Match_bets" />
+          <NavigationProperty Name="MatchBets" Relationship="ChallengeModel.FK__Match_bet__BetDe__7B5B524B1" FromRole="BetDetail" ToRole="MatchBet" />
+        </EntityType>
+        <EntityType Name="BetType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Bet" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="BetDetails" Relationship="ChallengeModel.FK__BetDetail__BetId__74AE54BC" FromRole="BetType" ToRole="BetDetail" />
+          <NavigationProperty Name="Match_bets" Relationship="ChallengeModel.FK__Match_bet__BetId__7A672E12" FromRole="BetType" ToRole="Match_bets" />
+          <NavigationProperty Name="MatchBets" Relationship="ChallengeModel.FK__Match_bet__BetId__7A672E121" FromRole="BetType" ToRole="MatchBet" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ShortCode" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Match_bets">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MatchId" Type="Int32" Nullable="false" />
+          <Property Name="PlayerId" Type="Int32" Nullable="false" />
+          <Property Name="BetId" Type="Int32" Nullable="false" />
+          <Property Name="BetDetailsId" Type="Int32" Nullable="false" />
+          <Property Name="MemberId" Type="Int32" Nullable="false" />
+          <Property Name="IsPrivate" Type="Boolean" Nullable="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="BetDetail" Relationship="ChallengeModel.FK__Match_bet__BetDe__7B5B524B" FromRole="Match_bets" ToRole="BetDetail" />
+          <NavigationProperty Name="BetType" Relationship="ChallengeModel.FK__Match_bet__BetId__7A672E12" FromRole="Match_bets" ToRole="BetType" />
+          <NavigationProperty Name="Match" Relationship="ChallengeModel.FK__Match_bet__Match__787EE5A0" FromRole="Match_bets" ToRole="Match" />
+          <NavigationProperty Name="Member" Relationship="ChallengeModel.FK__Match_bet__Membe__7C4F7684" FromRole="Match_bets" ToRole="Member" />
+          <NavigationProperty Name="Player" Relationship="ChallengeModel.FK__Match_bet__Playe__797309D9" FromRole="Match_bets" ToRole="Player" />
+          <NavigationProperty Name="MatchChallenges" Relationship="ChallengeModel.FK__MatchChal__Match__7D439ABD" FromRole="Match_bets" ToRole="MatchChallenge" />
+        </EntityType>
+        <EntityType Name="MatchChallenge">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MatchBetId" Type="Int32" Nullable="false" />
+          <Property Name="MemberId" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiledDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Match_bets" Relationship="ChallengeModel.FK__MatchChal__Match__7D439ABD" FromRole="MatchChallenge" ToRole="Match_bets" />
+          <NavigationProperty Name="Member" Relationship="ChallengeModel.FK__MatchChal__Membe__7E37BEF6" FromRole="MatchChallenge" ToRole="Member" />
+          <NavigationProperty Name="MatchBet" Relationship="ChallengeModel.FK__MatchChal__Match__7D439ABD1" FromRole="MatchChallenge" ToRole="MatchBet" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="StateId" Type="Int32" />
+          <NavigationProperty Name="Match_bets" Relationship="ChallengeModel.FK__Match_bet__Membe__7C4F7684" FromRole="Member" ToRole="Match_bets" />
+          <NavigationProperty Name="MatchChallenges" Relationship="ChallengeModel.FK__MatchChal__Membe__7E37BEF6" FromRole="Member" ToRole="MatchChallenge" />
+          <NavigationProperty Name="State" Relationship="ChallengeModel.FK__Members__StateId__7F2BE32F" FromRole="Member" ToRole="State" />
+          <NavigationProperty Name="MatchBets" Relationship="ChallengeModel.FK__Match_bet__Membe__7C4F76841" FromRole="Member" ToRole="MatchBet" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ShortCode" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Members" Relationship="ChallengeModel.FK__Members__StateId__7F2BE32F" FromRole="State" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="MemberTransaction">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="MemberId" />
+            <PropertyRef Name="Credit" />
+            <PropertyRef Name="Debit" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="ModifiedDate" />
+            <PropertyRef Name="CreatedBy" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="MemberId" Type="Int32" Nullable="false" />
+          <Property Name="Credit" Type="Int32" Nullable="false" />
+          <Property Name="Debit" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedBy" Type="Int32" />
+        </EntityType>
+        <EntityType Name="MemberWallet">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="MemberId" />
+            <PropertyRef Name="Credit" />
+            <PropertyRef Name="Debit" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="ModifiedDate" />
+            <PropertyRef Name="CreatedBy" />
+            <PropertyRef Name="Modifiedby" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberId" Type="Int32" Nullable="false" />
+          <Property Name="Credit" Type="Int32" Nullable="false" />
+          <Property Name="Debit" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="Modifiedby" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__BetDetail__BetId__74AE54BC">
+          <End Type="ChallengeModel.BetType" Role="BetType" Multiplicity="1" />
+          <End Type="ChallengeModel.BetDetail" Role="BetDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BetType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BetDetail">
+              <PropertyRef Name="BetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Match_bet__BetDe__7B5B524B">
+          <End Type="ChallengeModel.BetDetail" Role="BetDetail" Multiplicity="1" />
+          <End Type="ChallengeModel.Match_bets" Role="Match_bets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BetDetail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Match_bets">
+              <PropertyRef Name="BetDetailsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Match_bet__BetId__7A672E12">
+          <End Type="ChallengeModel.BetType" Role="BetType" Multiplicity="1" />
+          <End Type="ChallengeModel.Match_bets" Role="Match_bets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BetType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Match_bets">
+              <PropertyRef Name="BetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Match__SeriesId__75A278F5">
+          <End Type="ChallengeModel.Series" Role="Series" Multiplicity="1" />
+          <End Type="ChallengeModel.Match" Role="Match" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Series">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Match">
+              <PropertyRef Name="SeriesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Match__SeriesTea__76969D2E">
+          <End Type="ChallengeModel.SeriesTeam" Role="SeriesTeam" Multiplicity="1" />
+          <End Type="ChallengeModel.Match" Role="Match" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SeriesTeam">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Match">
+              <PropertyRef Name="SeriesTeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Match_bet__Match__787EE5A0">
+          <End Type="ChallengeModel.Match" Role="Match" Multiplicity="1" />
+          <End Type="ChallengeModel.Match_bets" Role="Match_bets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Match">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Match_bets">
+              <PropertyRef Name="MatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Match_bet__Membe__7C4F7684">
+          <End Type="ChallengeModel.Member" Role="Member" Multiplicity="1" />
+          <End Type="ChallengeModel.Match_bets" Role="Match_bets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Match_bets">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Match_bet__Playe__797309D9">
+          <End Type="ChallengeModel.Player" Role="Player" Multiplicity="1" />
+          <End Type="ChallengeModel.Match_bets" Role="Match_bets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Match_bets">
+              <PropertyRef Name="PlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MatchChal__Match__7D439ABD">
+          <End Type="ChallengeModel.Match_bets" Role="Match_bets" Multiplicity="1" />
+          <End Type="ChallengeModel.MatchChallenge" Role="MatchChallenge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Match_bets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MatchChallenge">
+              <PropertyRef Name="MatchBetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MatchChal__Membe__7E37BEF6">
+          <End Type="ChallengeModel.Member" Role="Member" Multiplicity="1" />
+          <End Type="ChallengeModel.MatchChallenge" Role="MatchChallenge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MatchChallenge">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Members__StateId__7F2BE32F">
+          <End Type="ChallengeModel.State" Role="State" Multiplicity="0..1" />
+          <End Type="ChallengeModel.Member" Role="Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SeriesTea__Playe__02FC7413">
+          <End Type="ChallengeModel.Player" Role="Player" Multiplicity="1" />
+          <End Type="ChallengeModel.SeriesTeamPlayer" Role="SeriesTeamPlayer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SeriesTeamPlayer">
+              <PropertyRef Name="PlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Series__SeriesTy__00200768">
+          <End Type="ChallengeModel.SeriesType" Role="SeriesType" Multiplicity="1" />
+          <End Type="ChallengeModel.Series" Role="Series" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SeriesType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Series">
+              <PropertyRef Name="SeriesTypes" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SeriesTea__Serie__01142BA1">
+          <End Type="ChallengeModel.Series" Role="Series" Multiplicity="1" />
+          <End Type="ChallengeModel.SeriesTeamPlayer" Role="SeriesTeamPlayer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Series">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SeriesTeamPlayer">
+              <PropertyRef Name="SeriesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SeriesTea__Serie__02084FDA">
+          <End Type="ChallengeModel.SeriesTeam" Role="SeriesTeam" Multiplicity="1" />
+          <End Type="ChallengeModel.SeriesTeamPlayer" Role="SeriesTeamPlayer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SeriesTeam">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SeriesTeamPlayer">
+              <PropertyRef Name="SeriesTeamsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="MatchBet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MatchId" Type="Int32" Nullable="false" />
+          <Property Name="PlayerId" Type="Int32" Nullable="false" />
+          <Property Name="BetId" Type="Int32" Nullable="false" />
+          <Property Name="BetDetailsId" Type="Int32" Nullable="false" />
+          <Property Name="MemberId" Type="Int32" Nullable="false" />
+          <Property Name="IsPrivate" Type="Boolean" Nullable="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="BetDetail" Relationship="ChallengeModel.FK__Match_bet__BetDe__7B5B524B1" FromRole="MatchBet" ToRole="BetDetail" />
+          <NavigationProperty Name="BetType" Relationship="ChallengeModel.FK__Match_bet__BetId__7A672E121" FromRole="MatchBet" ToRole="BetType" />
+          <NavigationProperty Name="Match" Relationship="ChallengeModel.FK__Match_bet__Match__787EE5A01" FromRole="MatchBet" ToRole="Match" />
+          <NavigationProperty Name="Member" Relationship="ChallengeModel.FK__Match_bet__Membe__7C4F76841" FromRole="MatchBet" ToRole="Member" />
+          <NavigationProperty Name="Player" Relationship="ChallengeModel.FK__Match_bet__Playe__797309D91" FromRole="MatchBet" ToRole="Player" />
+          <NavigationProperty Name="MatchChallenges" Relationship="ChallengeModel.FK__MatchChal__Match__7D439ABD1" FromRole="MatchBet" ToRole="MatchChallenge" />
+        </EntityType>
+        <Association Name="FK__Match_bet__BetDe__7B5B524B1">
+          <End Type="ChallengeModel.BetDetail" Role="BetDetail" Multiplicity="1" />
+          <End Type="ChallengeModel.MatchBet" Role="MatchBet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BetDetail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MatchBet">
+              <PropertyRef Name="BetDetailsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Match_bet__BetId__7A672E121">
+          <End Type="ChallengeModel.BetType" Role="BetType" Multiplicity="1" />
+          <End Type="ChallengeModel.MatchBet" Role="MatchBet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BetType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MatchBet">
+              <PropertyRef Name="BetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Match_bet__Match__787EE5A01">
+          <End Type="ChallengeModel.Match" Role="Match" Multiplicity="1" />
+          <End Type="ChallengeModel.MatchBet" Role="MatchBet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Match">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MatchBet">
+              <PropertyRef Name="MatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Match_bet__Membe__7C4F76841">
+          <End Type="ChallengeModel.Member" Role="Member" Multiplicity="1" />
+          <End Type="ChallengeModel.MatchBet" Role="MatchBet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MatchBet">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Match_bet__Playe__797309D91">
+          <End Type="ChallengeModel.Player" Role="Player" Multiplicity="1" />
+          <End Type="ChallengeModel.MatchBet" Role="MatchBet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MatchBet">
+              <PropertyRef Name="PlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MatchChal__Match__7D439ABD1">
+          <End Type="ChallengeModel.MatchBet" Role="MatchBet" Multiplicity="1" />
+          <End Type="ChallengeModel.MatchChallenge" Role="MatchChallenge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MatchBet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MatchChallenge">
+              <PropertyRef Name="MatchBetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ChallengeModelStoreContainer" CdmEntityContainer="ChallengeEntities">
+          <EntitySetMapping Name="Matches">
+            <EntityTypeMapping TypeName="ChallengeModel.Match">
+              <MappingFragment StoreEntitySet="Match">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="SeriesId" ColumnName="SeriesId" />
+                <ScalarProperty Name="SeriesTeamId" ColumnName="SeriesTeamId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="GroundName" ColumnName="GroundName" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nationalities">
+            <EntityTypeMapping TypeName="ChallengeModel.Nationality">
+              <MappingFragment StoreEntitySet="Nationality">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Nation" ColumnName="Nation" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Players">
+            <EntityTypeMapping TypeName="ChallengeModel.Player">
+              <MappingFragment StoreEntitySet="Players">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+                <ScalarProperty Name="Bats" ColumnName="Bats" />
+                <ScalarProperty Name="Bowls" ColumnName="Bowls" />
+                <ScalarProperty Name="Credits" ColumnName="Credits" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="TotalPoints" ColumnName="TotalPoints" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Series">
+            <EntityTypeMapping TypeName="ChallengeModel.Series">
+              <MappingFragment StoreEntitySet="Series">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SeriesTypes" ColumnName="SeriesTypes" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="NoOfMatchs" ColumnName="NoOfMatchs" />
+                <ScalarProperty Name="NoOfTeams" ColumnName="NoOfTeams" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SeriesTeamPlayers">
+            <EntityTypeMapping TypeName="ChallengeModel.SeriesTeamPlayer">
+              <MappingFragment StoreEntitySet="SeriesTeamPlayers">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="SeriesId" ColumnName="SeriesId" />
+                <ScalarProperty Name="SeriesTeamsId" ColumnName="SeriesTeamsId" />
+                <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SeriesTeams">
+            <EntityTypeMapping TypeName="ChallengeModel.SeriesTeam">
+              <MappingFragment StoreEntitySet="SeriesTeams">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="SeriesId" ColumnName="SeriesId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SeriesTypes">
+            <EntityTypeMapping TypeName="ChallengeModel.SeriesType">
+              <MappingFragment StoreEntitySet="SeriesTypes">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BetDetails">
+            <EntityTypeMapping TypeName="ChallengeModel.BetDetail">
+              <MappingFragment StoreEntitySet="BetDetails">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="BetId" ColumnName="BetId" />
+                <ScalarProperty Name="BetValue" ColumnName="BetValue" />
+                <ScalarProperty Name="Bet" ColumnName="Bet" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BetTypes">
+            <EntityTypeMapping TypeName="ChallengeModel.BetType">
+              <MappingFragment StoreEntitySet="BetTypes">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Bet" ColumnName="Bet" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="ChallengeModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ShortCode" ColumnName="ShortCode" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MatchChallenges">
+            <EntityTypeMapping TypeName="ChallengeModel.MatchChallenge">
+              <MappingFragment StoreEntitySet="MatchChallenges">
+                <ScalarProperty Name="ModifiledDate" ColumnName="ModifiledDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="MatchBetId" ColumnName="MatchBetId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Members">
+            <EntityTypeMapping TypeName="ChallengeModel.Member">
+              <MappingFragment StoreEntitySet="Members">
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="States">
+            <EntityTypeMapping TypeName="ChallengeModel.State">
+              <MappingFragment StoreEntitySet="State">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ShortCode" ColumnName="ShortCode" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ChallengeModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MemberTransactions">
+            <EntityTypeMapping TypeName="ChallengeModel.MemberTransaction">
+              <MappingFragment StoreEntitySet="MemberTransactions">
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Debit" ColumnName="Debit" />
+                <ScalarProperty Name="Credit" ColumnName="Credit" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MemberWallets">
+            <EntityTypeMapping TypeName="ChallengeModel.MemberWallet">
+              <MappingFragment StoreEntitySet="MemberWallet">
+                <ScalarProperty Name="Modifiedby" ColumnName="Modifiedby" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Debit" ColumnName="Debit" />
+                <ScalarProperty Name="Credit" ColumnName="Credit" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MatchBets">
+            <EntityTypeMapping TypeName="ChallengeModel.MatchBet">
+              <MappingFragment StoreEntitySet="MatchBets">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="IsPrivate" ColumnName="IsPrivate" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="BetDetailsId" ColumnName="BetDetailsId" />
+                <ScalarProperty Name="BetId" ColumnName="BetId" />
+                <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
+                <ScalarProperty Name="MatchId" ColumnName="MatchId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
